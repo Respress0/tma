@@ -1,18 +1,37 @@
-// src/components/Sidebar.tsx
 import React from "react";
+import {
+  Box,
+  VStack,
+  Heading,
+  Link as ChakraLink,
+} from "@chakra-ui/react";
 
 const Sidebar = () => {
   return (
-    <aside className="w-64 h-screen bg-gray-800 text-white p-4">
-      <h2 className="text-2xl font-bold mb-6">Dashboard</h2>
-      <nav>
-        <ul className="space-y-4">
-          <li><a href="#" className="hover:text-gray-300">Главная</a></li>
-          <li><a href="#" className="hover:text-gray-300">Аналитика</a></li>
-          <li><a href="#" className="hover:text-gray-300">Настройки</a></li>
-        </ul>
-      </nav>
-    </aside>
+    <Box
+      as="aside"
+      w="64"
+      h="100vh"
+      bg="gray.800"
+      color="white"
+      p={4}
+    >
+      <Heading size="md" mb={6}>
+        Dashboard
+      </Heading>
+
+      <VStack align="stretch" spacing={4}>
+        <ChakraLink href="#" _hover={{ color: "gray.300" }}>
+          Главная
+        </ChakraLink>
+        <ChakraLink href="#" _hover={{ color: "gray.300" }}>
+          Аналитика
+        </ChakraLink>
+        <ChakraLink href="#" _hover={{ color: "gray.300" }}>
+          Настройки
+        </ChakraLink>
+      </VStack>
+    </Box>
   );
 };
 
