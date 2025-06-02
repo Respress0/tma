@@ -1,34 +1,37 @@
-// src/components/Dashboard.tsx
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const Dashboard = () => {
-  const [user, setUser] = useState<any>(null);
+  const [title, setTitle] = useState("");
 
-  useEffect(() => {
-    if (window.Telegram?.WebApp) {
-      const tg = window.Telegram.WebApp;
-      tg.ready();
-      setUser(tg.initDataUnsafe?.user);
+  const handleSubmit = () => {
+    if (title.trim()) {
+      alert(`Мероприятие "${title}" создано!`);
+      setTitle("");
     }
-  }, []);
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center px-4 py-6">
-      {user ? (
-        <div className="flex flex-col items-center">
-          <img
-            src={user.photo_url}
-            alt="User avatar"
-            className="w-24 h-24 rounded-full shadow-md mb-3"
-          />
-          <h2 className="text-2xl font-semibold text-gray-800 mb-1">
-            Привет, {user.first_name} {user.last_name || ""}
-          </h2>
-          <p className="text-sm text-gray-500">@{user.username}</p>
-        </div>
-      ) : (
-        <p className="text-gray-500 text-sm">Загрузка профиля...</p>
-      )}
+    <div className="min-h-screen bg-yellow-100 flex justify-center items-center px-4">
+      <div className="bg-pink-200 rounded-3xl p-6 w-full max-w-sm shadow-md text-center">
+        <h1 className="text-2xl font-bold text-purple-700 mb-6">
+          Создать <br /> мероприятие
+        </h1>
+
+        <input
+          type="text"
+          placeholder="Название"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="w-full px-4 py-2 mb-4 rounded-xl text-gray-700 bg-white placeholder-gray-400 focus:outline-none"
+        />
+
+        <button
+          onClick={handleSubmit}
+          className="w-full py-2 bg-green-300 text-white rounded-xl font-semibold hover:bg-green-400 transition"
+        >
+          Создать
+        </button>
+      </div>
     </div>
   );
 };
