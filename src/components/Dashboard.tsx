@@ -1,38 +1,37 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  Avatar,
+  Center,
+  Spinner,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 
 const Dashboard = () => {
-  const [title, setTitle] = useState("");
+  const [user, setUser] = useState<any>(null);
 
-  const handleSubmit = () => {
-    if (title.trim()) {
-      alert(`Мероприятие "${title}" создано!`);
-      setTitle("");
+  useEffect(() => {
+    if (window.Telegram?.WebApp) {
+      const tg = window.Telegram.WebApp;
+      tg.ready();
+      setUser(tg.initDataUnsafe?.user);
     }
-  };
+  }, []);
 
   return (
-    <div className="min-h-screen bg-yellow-100 flex justify-center items-center px-4">
-      <div className="bg-pink-200 rounded-3xl p-6 w-full max-w-sm shadow-md text-center">
-        <h1 className="text-2xl font-bold text-purple-700 mb-6">
-          Создать <br /> мероприятие
-        </h1>
-
-        <input
-          type="text"
-          placeholder="Название"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="w-full px-4 py-2 mb-4 rounded-xl text-gray-700 bg-white placeholder-gray-400 focus:outline-none"
-        />
-
-        <button
-          onClick={handleSubmit}
-          className="w-full py-2 bg-green-300 text-white rounded-xl font-semibold hover:bg-green-400 transition"
-        >
-          Создать
-        </button>
-      </div>
-    </div>
+    <Center minH="100vh" bg="gray.50" px={4}>
+      {user ? (
+        <VStack spacing={3}>
+          <Avatar size="xl" name={user.first_name} src={user.photo_url} />
+          <Text fontSize="2xl" fontWeight="bold">
+            Привет, {user.first_name} {user.last_name || ""}
+          </Text>
+          <Text color="gray.500">@{user.username}</Text>
+        </VStack>
+      ) : (
+        <Spinner color="blue.500" size="xl" />
+      )}
+    </Center>
   );
 };
 

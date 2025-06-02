@@ -1,36 +1,45 @@
-// src/components/BottomMenu.tsx
-import React, { useState } from "react";
+import { Box, VStack, IconButton, Text } from "@chakra-ui/react";
 import { Home, Search, User } from "lucide-react";
 
 const BottomMenu = ({ onTabChange }: { onTabChange: (tab: string) => void }) => {
-  const [activeTab, setActiveTab] = useState("home");
-
   const tabs = [
-    { id: "home", label: "Домой", icon: <Home size={24} /> },
-    { id: "search", label: "Поиск", icon: <Search size={24} /> },
-    { id: "profile", label: "Профиль", icon: <User size={24} /> },
+    { id: "home", label: "Домой", icon: Home },
+    { id: "search", label: "Поиск", icon: Search },
+    { id: "profile", label: "Профиль", icon: User },
   ];
 
-  const handleClick = (tabId: string) => {
-    setActiveTab(tabId);
-    onTabChange(tabId);
-  };
-
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t flex justify-around py-2 shadow-md z-10">
+    <Box
+      position="fixed"
+      bottom={0}
+      left={0}
+      right={0}
+      bg="white"
+      borderTop="1px"
+      borderColor="gray.200"
+      display="flex"
+      justifyContent="space-around"
+      py={2}
+      zIndex={10}
+    >
       {tabs.map((tab) => (
-        <button
+        <VStack
           key={tab.id}
-          className={`flex flex-col items-center text-xs ${
-            activeTab === tab.id ? "text-blue-600" : "text-gray-500"
-          }`}
-          onClick={() => handleClick(tab.id)}
+          spacing={0.5}
+          onClick={() => onTabChange(tab.id)}
+          cursor="pointer"
         >
-          {tab.icon}
-          <span>{tab.label}</span>
-        </button>
+          <IconButton
+            aria-label={tab.label}
+            icon={<tab.icon size={24} />}
+            variant="ghost"
+            size="lg"
+            isRound
+          />
+          <Text fontSize="xs">{tab.label}</Text>
+        </VStack>
       ))}
-    </div>
+    </Box>
   );
 };
 

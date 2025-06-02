@@ -1,22 +1,39 @@
-import React, { useState } from "react";
-import Dashboard from "./components/Dashboard";
-import BottomMenu from "./components/BottomMenu";
+import { Box, IconButton, VStack, Text } from "@chakra-ui/react";
+import { Home, Search, User } from "lucide-react";
 
-function App() {
-  const [activeTab, setActiveTab] = useState("home");
+const BottomMenu = ({ onTabChange }) => {
+  const tabs = [
+    { id: "home", label: "Домой", icon: Home },
+    { id: "search", label: "Поиск", icon: Search },
+    { id: "profile", label: "Профиль", icon: User },
+  ];
 
   return (
-    <div className="pb-16">
-      {activeTab === "home" && <Dashboard />}
-      {activeTab === "search" && (
-        <div className="p-6 text-center text-gray-500">Поиск будет позже 🙂</div>
-      )}
-      {activeTab === "profile" && (
-        <div className="p-6 text-center text-gray-500">Профиль будет позже 👤</div>
-      )}
-      <BottomMenu onTabChange={setActiveTab} />
-    </div>
+    <Box
+      position="fixed"
+      bottom={0}
+      left={0}
+      right={0}
+      bg="white"
+      borderTop="1px"
+      borderColor="gray.200"
+      display="flex"
+      justifyContent="space-around"
+      py={2}
+      zIndex={10}
+    >
+      {tabs.map((tab) => (
+        <VStack key={tab.id} spacing={0.5} onClick={() => onTabChange(tab.id)}>
+          <IconButton
+            aria-label={tab.label}
+            icon={<tab.icon size={24} />}
+            variant="ghost"
+          />
+          <Text fontSize="xs">{tab.label}</Text>
+        </VStack>
+      ))}
+    </Box>
   );
-}
+};
 
-export default App;
+export default BottomMenu;
