@@ -1,24 +1,18 @@
-// src/App.jsx
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import CreateEvent from "./pages/CreateEvent";
-import EventDetails from "./pages/EventDetails";
-import { useEffect } from "react";
-import { initTelegram } from "./telegram";
+// App.jsx
+import React from "react";
+import Sidebar from "./components/Sidebar";
+import Header from "./components/Header";
+import Dashboard from "./components/Dashboard";
 
 function App() {
-  useEffect(() => {
-    initTelegram();
-  }, []);
-
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/event/:id" element={<EventDetails />} />
-        <Route path="/create" element={<CreateEvent />} />
-      </Routes>
-    </BrowserRouter>
+    <div className="flex">
+      <Sidebar />
+      <main className="flex-1 bg-gray-100 min-h-screen">
+        <Header />
+        <Dashboard />
+      </main>
+    </div>
   );
 }
 
