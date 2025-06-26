@@ -13,8 +13,8 @@ const userUsername = document.getElementById('user-username');
 const userAvatar = document.getElementById('user-avatar');
 
 // Supabase клиент
-const supabaseUrl = 'https://your-project-ref.supabase.co';
-const supabaseKey = 'your-supabase-key';
+const supabaseUrl = 'https://aatlvnreiwitnopwlgci.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFhdGx2bnJlaXdpdG5vcHdsZ2NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA5NDU4NzcsImV4cCI6MjA2NjUyMTg3N30.y7oREoOvyUvdmWUQEdu5tStVuom1DKvtETbZpwHbq44';
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 // Инициализация приложения
