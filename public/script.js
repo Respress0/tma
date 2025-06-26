@@ -17,6 +17,24 @@ const supabaseUrl = 'https://aatlvnreiwitnopwlgci.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFhdGx2bnJlaXdpdG5vcHdsZ2NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA5NDU4NzcsImV4cCI6MjA2NjUyMTg3N30.y7oREoOvyUvdmWUQEdu5tStVuom1DKvtETbZpwHbq44';
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
+//  Основная функция инициализации
+async function initApp() {
+    try {
+        if (tg.initDataUnsafe?.user) {
+            const tgUser = tg.initDataUnsafe.user;
+            await handleTelegramAuth(tgUser);
+            showProfileSection();
+        } else {
+            showAuthSection();
+        }
+    } catch (error) {
+        console.error('Initialization error:', error);
+        showAuthSection();
+    } finally {
+        document.getElementById('loading-section').classList.add('hidden');
+    }
+}
+
 // Инициализация приложения
 async function initApp() {
     try {
