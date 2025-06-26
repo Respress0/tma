@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Auth App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="auth-section" class="hidden">
+            <h1>Добро пожаловать!</h1>
+            <p>Пожалуйста, авторизуйтесь через Telegram</p>
+            <button id="auth-button" class="tg-button">Войти через Telegram</button>
+        </div>
+
+        <div id="profile-section" class="hidden">
+            <h1>Ваш профиль</h1>
+            <div class="profile-info">
+                <img id="user-avatar" src="" alt="Аватар" class="avatar">
+                <h2 id="user-name"></h2>
+                <p id="user-username"></p>
+            </div>
+            <button id="logout-button" class="tg-button logout">Выйти</button>
+        </div>
+
+        <div id="loading-section">
+            <div class="loader"></div>
+            <p>Загрузка...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
