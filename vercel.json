@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "public": true,
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/public/$1"
+    }
+  ],
+  "env": {
+    "SUPABASE_URL": "@your-supabase-url",
+    "SUPABASE_KEY": "@your-supabase-key"
+  }
+}
