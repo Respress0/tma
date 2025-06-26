@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Инициализация Supabase
-    const supabase = supabase.createClient(
+    // ✅ Инициализация Supabase
+    const supabase = window.supabase.createClient(
         'https://aatlvnreiwitnopwlgci.supabase.co',
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFhdGx2bnJlaXdpdG5vcHdsZ2NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA5NDU4NzcsImV4cCI6MjA2NjUyMTg3N30.y7oREoOvyUvdmWUQEdu5tStVuom1DKvtETbZpwHbq44'
     );
+
 
     // Инициализация Telegram WebApp
     const tg = window.Telegram.WebApp;
