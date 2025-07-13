@@ -1,15 +1,23 @@
 {
-  "name": "tma",
+  "name": "telegram-mini-app",
   "version": "1.0.0",
+  "description": "",
+  "main": "next.config.js",
+  "directories": {
+    "lib": "lib"
+  },
   "scripts": {
-    "dev": "vercel dev",
-    "start": "vercel start",
-    "build": "echo 'Static site - no build needed' && exit 0"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "@supabase/supabase-js": "^2.39.0"
-  },
-  "devDependencies": {
-    "vercel": "^28.16.0"
+    "next": "^15.3.5",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   }
 }
