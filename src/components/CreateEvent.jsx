@@ -1,21 +1,21 @@
-import { useState } from 'react';
-import { createEvent } from '../utils/api';
+import { useState } from "react";
+import { createEvent } from "../utils/api";
 
-const CreateEvent = ({ user }) => {
+const CreateEvent = () => {
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    date: '',
-    location: ''
+    title: "",
+    description: "",
+    date: "",
+    location: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -23,20 +23,16 @@ const CreateEvent = ({ user }) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await createEvent({
-        ...formData,
-        organizer: user?.firstName || 'Аноним'
-      });
+      await createEvent(formData);
       setSuccess(true);
       setFormData({
-        title: '',
-        description: '',
-        date: '',
-        location: ''
+        title: "",
+        description: "",
+        date: "",
+        location: "",
       });
-      setTimeout(() => setSuccess(false), 3000);
     } catch (error) {
-      console.error('Error creating event:', error);
+      console.error("Error creating event:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -45,9 +41,11 @@ const CreateEvent = ({ user }) => {
   return (
     <div>
       <h2>Создать мероприятие</h2>
-      {success && <p style={{ color: 'green' }}>Мероприятие успешно создано!</p>}
+      {success && (
+        <p style={{ color: "green" }}>Мероприятие успешно создано!</p>
+      )}
       <form onSubmit={handleSubmit}>
-        <div>
+        <div style={{ marginBottom: "10px" }}>
           <label>
             Название:
             <input
@@ -56,10 +54,11 @@ const CreateEvent = ({ user }) => {
               value={formData.title}
               onChange={handleChange}
               required
+              style={{ width: "100%", padding: "8px" }}
             />
           </label>
         </div>
-        <div>
+        <div style={{ marginBottom: "10px" }}>
           <label>
             Описание:
             <textarea
@@ -67,35 +66,48 @@ const CreateEvent = ({ user }) => {
               value={formData.description}
               onChange={handleChange}
               required
+              style={{ width: "100%", padding: "8px", minHeight: "100px" }}
             />
           </label>
         </div>
-        <div>
+        <div style={{ marginBottom: "10px" }}>
           <label>
-            Дата и время:
+            Дата:
             <input
               type="datetime-local"
               name="date"
               value={formData.date}
               onChange={handleChange}
               required
+              style={{ width: "100%", padding: "8px" }}
             />
           </label>
         </div>
-        <div>
+        <div style={{ marginBottom: "10px" }}>
           <label>
-            Место проведения:
+            Место:
             <input
               type="text"
               name="location"
               value={formData.location}
               onChange={handleChange}
               required
+              style={{ width: "100%", padding: "8px" }}
             />
           </label>
         </div>
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'Создание...' : 'Создать мероприятие'}
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          style={{
+            padding: "10px 20px",
+            background: "#0088cc",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+          }}
+        >
+          {isSubmitting ? "Создание..." : "Создать"}
         </button>
       </form>
     </div>
