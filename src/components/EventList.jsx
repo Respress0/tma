@@ -1,21 +1,18 @@
 import { useEffect, useState } from "react";
 import { getEvents } from "../utils/api";
-import { logger } from "../utils/logger";
 
-const EventList = ({ user }) => {
+const EventList = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    logger.info("Загрузка списка мероприятий");
     const fetchEvents = async () => {
       try {
         const data = await getEvents();
         setEvents(data);
         setLoading(false);
-        logger.info(`Успешно загружено ${data.length} мероприятий`);
       } catch (error) {
-        logger.error("Ошибка при загрузке мероприятий", error);
+        console.error("Error fetching events:", error);
         setLoading(false);
       }
     };
@@ -23,10 +20,7 @@ const EventList = ({ user }) => {
     fetchEvents();
   }, []);
 
-  if (loading) {
-    logger.info("Отображаем индикатор загрузки");
-    return <div>Загрузка...</div>;
-  }
+  if (loading) return <div>Загрузка...</div>;
 
   return (
     <div>
@@ -34,19 +28,24 @@ const EventList = ({ user }) => {
       {events.length === 0 ? (
         <p>Нет доступных мероприятий</p>
       ) : (
-        <div>
+        <ul>
           {events.map((event) => (
-            <div key={event.id} className="event-card">
-              <h3 className="event-title">{event.title}</h3>
+            <li
+              key={event.id}
+              style={{
+                marginBottom: "20px",
+                padding: "10px",
+                border: "1px solid #ddd",
+                borderRadius: "5px",
+              }}
+            >
+              <h3>{event.title}</h3>
               <p>{event.description}</p>
-              <div className="event-meta">
-                <p>Дата: {new Date(event.date).toLocaleDateString()}</p>
-                <p>Место: {event.location}</p>
-                <p>Организатор: {event.organizer}</p>
-              </div>
-            </div>
+              <p>Дата: {new Date(event.date).toLocaleDateString()}</p>
+              <p>Место: {event.location}</p>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
     </div>
   );
